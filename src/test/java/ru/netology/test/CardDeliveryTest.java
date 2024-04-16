@@ -116,6 +116,45 @@ class CardDeliveryTest {
                 .shouldHave(exactText("Встреча успешно запланирована на " + secondMeetingDate));
     }
 
+    // Багрепорт. Заявка не отправляется при наличии в имени буквы ё
+    @Test
+    @DisplayName("Should successful plan and replan meeting")
+    void shouldSuccessfulPlanAndReplanMeetingWennNameWithЁ() {
+        var validUser = DataGenerator.Registration.generateUser("ru");
+        var daysToAddForFirstMeeting = 4;
+        var firstMeetingDate = DataGenerator.generateDate(daysToAddForFirstMeeting);
+        var daysToAddForSecondMeeting = 7;
+        var secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
+        $("[data-test-id='city'] input").setValue(validUser.getCity());
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
+        $("[data-test-id='date'] input").setValue(firstMeetingDate);
+        $("[data-test-id='name'] input").setValue("Сидорова Алёна");
+        $("[data-test-id='phone'] input").setValue(validUser.getPhone());
+        $("[data-test-id='agreement']").click();
+        $("button.button").click();
+        $("[data-test-id='success-notification'] .notification__title")
+                .shouldBe(visible)
+                .shouldHave(exactText("Успешно!"));
+        $("[data-test-id='success-notification'] .notification__content")
+                .shouldBe(visible)
+                .shouldHave(exactText("Встреча успешно запланирована на " + firstMeetingDate));
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
+        $("[data-test-id='date'] input").setValue(secondMeetingDate);
+        $("button.button").click();
+        $("[data-test-id='replan-notification'] .notification__title")
+                .shouldBe(visible)
+                .shouldHave(exactText("Необходимо подтверждение"));
+        $("[data-test-id='replan-notification'] .notification__content")
+                .shouldBe(visible)
+                .shouldHave(exactText("У вас уже запланирована встреча на другую дату. Перепланировать? Перепланировать"));
+        $("[data-test-id='replan-notification'] .button").click();
+        $("[data-test-id='success-notification'] .notification__title")
+                .shouldBe(visible)
+                .shouldHave(exactText("Успешно!"));
+        $("[data-test-id='success-notification'] .notification__content")
+                .shouldBe(visible)
+                .shouldHave(exactText("Встреча успешно запланирована на " + secondMeetingDate));
+    }
     @Test
     @DisplayName("Should stop because of out of city")
     void shouldNotSendFormWithoutCity() {
