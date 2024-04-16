@@ -1,1 +1,5 @@
-[![Java CI with Gradle](https://github.com/RezedaT/Patterns1/actions/workflows/gradle.yml/badge.svg)](https://github.com/RezedaT/Patterns1/actions/workflows/gradle.yml)
+[![Java CI with Gradle](https://github.com/RezedaT/Patterns1-Allure/actions/workflows/gradle.yml/badge.svg)](https://github.com/RezedaT/Patterns1-Allure/actions/workflows/gradle.yml)
+![image](https://github.com/RezedaT/Patterns1-Allure/assets/152332460/a8a8cfb2-3e1d-44e1-a781-c75bab01ec22)
+![image](https://github.com/RezedaT/Patterns1-Allure/assets/152332460/8109949c-d8d9-4adb-a126-4aee8bb7af79)
+![image](https://github.com/RezedaT/Patterns1-Allure/assets/152332460/114db369-948d-4086-98b7-0c7ba1665662)
+![image](https://github.com/RezedaT/Patterns1-Allure/assets/152332460/715c2717-7d78-4a53-b0d9-fd2668e6e2f5)
